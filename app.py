@@ -1,167 +1,200 @@
 """
-CryptoGuard AI - Professional Cryptocurrency Security & Analysis Platform
-Main application entry point with Streamlit configuration
+CryptoGuard AI - Premium cryptocurrency portfolio dashboard.
 """
 
-import streamlit as st
-import json
-from pathlib import Path
+from __future__ import annotations
 
-# Configure Streamlit
+import streamlit as st
+
+from utils.ui import inject_global_styles
+
+
 st.set_page_config(
-    page_title="CryptoGuard AI",
+    page_title="CryptoGuard AI | FinTech Portfolio Dashboard",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
         "Get Help": "https://github.com/AbdulRehmanRaza03/CryptoGuard-AI",
         "Report a bug": "https://github.com/AbdulRehmanRaza03/CryptoGuard-AI/issues",
-        "About": "CryptoGuard AI - Your Personal Cryptocurrency Guardian"
-    }
+        "About": "CryptoGuard AI - Premium crypto portfolio and risk dashboard",
+    },
 )
 
-# Custom CSS for dark theme and professional styling
-st.markdown("""
-    <style>
-    /* Main theme colors */
-    :root {
-        --primary-color: #00D9FF;
-        --secondary-color: #0A1628;
-        --accent-color: #FF006E;
-        --success-color: #00BB41;
-        --warning-color: #FFB81C;
-        --danger-color: #FF4444;
-    }
-    
-    /* Dark theme background */
-    .stApp {
-        background: linear-gradient(135deg, #0A1628 0%, #1A2847 100%);
-        color: #E0E0E0;
-    }
-    
-    /* Sidebar styling */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0F2438 0%, #1A3A52 100%);
-        border-right: 2px solid #00D9FF;
-    }
-    
-    /* Header styling */
-    h1, h2, h3 {
-        color: #00D9FF;
-        font-weight: 700;
-    }
-    
-    /* Button styling */
-    .stButton > button {
-        background: linear-gradient(90deg, #00D9FF 0%, #0099CC 100%);
-        color: #0A1628;
-        font-weight: 600;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 24px;
-        transition: all 0.3s ease;
-    }
-    
-    .stButton > button:hover {
-        background: linear-gradient(90deg, #00FFFF 0%, #00CCFF 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 216, 255, 0.3);
-    }
-    
-    /* Input fields */
-    .stTextInput > div > div > input,
-    .stNumberInput > div > div > input,
-    .stSelectbox > div > div > select {
-        background-color: #1A3A52;
-        color: #E0E0E0;
-        border: 2px solid #00D9FF;
-        border-radius: 6px;
-        padding: 10px;
-    }
-    
-    /* Metric boxes */
-    .metric-card {
-        background: linear-gradient(135deg, #1A3A52 0%, #0F2438 100%);
-        border: 2px solid #00D9FF;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 10px 0;
-        box-shadow: 0 4px 15px rgba(0, 216, 255, 0.1);
-    }
-    
-    /* Success message */
-    .stSuccess {
-        background-color: rgba(0, 187, 65, 0.1);
-        border: 2px solid #00BB41;
-        border-radius: 6px;
-    }
-    
-    /* Warning message */
-    .stWarning {
-        background-color: rgba(255, 184, 28, 0.1);
-        border: 2px solid #FFB81C;
-        border-radius: 6px;
-    }
-    
-    /* Error message */
-    .stError {
-        background-color: rgba(255, 68, 68, 0.1);
-        border: 2px solid #FF4444;
-        border-radius: 6px;
-    }
-    
-    /* Info message */
-    .stInfo {
-        background-color: rgba(0, 216, 255, 0.1);
-        border: 2px solid #00D9FF;
-        border-radius: 6px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+inject_global_styles()
 
-# Sidebar configuration
-st.sidebar.markdown("# 🛡️ CryptoGuard AI")
-st.sidebar.markdown("---")
-
-# Sidebar info
 with st.sidebar:
-    st.markdown("""
-    ### Version 1.0.0
+    st.markdown(
+        """
+        <div style="padding:0.4rem 0 0.8rem 0;">
+            <div style="font-size:1.55rem;font-weight:800;letter-spacing:-0.04em;">🛡️ CryptoGuard AI</div>
+            <div style="color:rgba(237,242,255,0.72);margin-top:0.35rem;line-height:1.5;">
+                Professional portfolio monitoring, live pricing, and wallet risk intelligence.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.caption("Pages are available from the sidebar navigation.")
+    st.divider()
+    st.markdown("### What’s inside")
+    st.write("• Live Portfolio"); st.write("• Market Dashboard"); st.write("• Scam Detector"); st.write("• Portfolio Optimizer")
+    st.divider()
+    st.markdown("[GitHub](https://github.com/AbdulRehmanRaza03/CryptoGuard-AI)")
+    st.markdown("[Issues](https://github.com/AbdulRehmanRaza03/CryptoGuard-AI/issues)")
+
+
+def main() -> None:
+    # Hero section with value proposition
+    st.markdown(
+        """
+        <div style="text-align:center;padding:2rem 0;">
+            <h1 style="font-size:3.2rem;margin:0;letter-spacing:-0.05em;">🛡️ Take Control of Your Crypto</h1>
+            <p style="font-size:1.25rem;color:rgba(237,242,255,0.75);margin-top:1rem;margin-bottom:0;">
+                Monitor. Analyze. Protect. Your complete cryptocurrency portfolio intelligence platform.
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
     
-    **Your Personal Cryptocurrency Guardian**
+    st.divider()
     
-    Protect, analyze, and secure your digital assets with AI-powered insights.
-    """)
+    # Feature cards with icons and benefits
+    st.markdown("### ⚡ Core Features")
+    col1, col2, col3, col4 = st.columns(4)
     
-    st.markdown("---")
+    with col1:
+        st.markdown(
+            """
+            <div style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);border-radius:1rem;padding:1.5rem;text-align:center;">
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">💼</div>
+                <h3 style="margin:0.5rem 0;font-size:1.1rem;">Live Portfolio</h3>
+                <p style="color:rgba(237,242,255,0.7);font-size:0.9rem;margin:0;">Real-time price updates & gains/losses</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
     
-    st.markdown("""
-    ### Features
-    - 📊 Real-time Portfolio Tracking
-    - 🔍 Advanced Risk Analysis
-    - 🚨 Scam Detection System
-    - 📈 Market Dashboard
-    - 🤖 AI-Powered Insights
-    """)
+    with col2:
+        st.markdown(
+            """
+            <div style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);border-radius:1rem;padding:1.5rem;text-align:center;">
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">📊</div>
+                <h3 style="margin:0.5rem 0;font-size:1.1rem;">Market Dashboard</h3>
+                <p style="color:rgba(237,242,255,0.7);font-size:0.9rem;margin:0;">Analytics & performance tracking</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
     
-    st.markdown("---")
+    with col3:
+        st.markdown(
+            """
+            <div style="background:rgba(251,113,133,0.1);border:1px solid rgba(251,113,133,0.3);border-radius:1rem;padding:1.5rem;text-align:center;">
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">🔍</div>
+                <h3 style="margin:0.5rem 0;font-size:1.1rem;">Risk Analysis</h3>
+                <p style="color:rgba(237,242,255,0.7);font-size:0.9rem;margin:0;">Volatility & concentration scoring</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
     
-    # Footer links
+    with col4:
+        st.markdown(
+            """
+            <div style="background:rgba(94,234,212,0.1);border:1px solid rgba(94,234,212,0.3);border-radius:1rem;padding:1.5rem;text-align:center;">
+                <div style="font-size:2.5rem;margin-bottom:0.5rem;">🚨</div>
+                <h3 style="margin:0.5rem 0;font-size:1.1rem;">Scam Detection</h3>
+                <p style="color:rgba(237,242,255,0.7);font-size:0.9rem;margin:0;">Wallet security & risk alerts</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    
+    st.divider()
+    
+    # Why CryptoGuard section
+    st.markdown("### 🎯 Why CryptoGuard AI?")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown(
+            """
+            ✅ **Real-time Market Data**  
+            Live prices from CoinGecko with intelligent caching
+            
+            ✅ **Advanced Risk Scoring**  
+            Volatility analysis, concentration metrics, and diversification insights
+            
+            ✅ **Security First**  
+            Etherscan-powered wallet analysis to detect scam patterns
+            
+            ✅ **Smart Optimization**  
+            AI-driven rebalancing recommendations for portfolio growth
+            """
+        )
+    
+    with col2:
+        st.markdown(
+            """
+            ✅ **One-Click Analytics**  
+            Comprehensive dashboards with minimal setup
+            
+            ✅ **PKR Conversion**  
+            Automatic USD ↔ PKR exchange rates for local insights
+            
+            ✅ **Portfolio History**  
+            Track snapshots over time to see growth trends
+            
+            ✅ **Open Source**  
+            Community-driven, transparent, and always improving
+            """
+        )
+    
+    st.divider()
+    
+    # Call-to-action section
+    st.markdown("### 🚀 Get Started in 30 Seconds")
+    
+    action_col1, action_col2, action_col3 = st.columns(3)
+    
+    with action_col1:
+        if st.button("📈 View Live Portfolio", use_container_width=True, key="cta_portfolio"):
+            st.switch_page("pages/2_Portfolio.py")
+    
+    with action_col2:
+        if st.button("📊 Market Dashboard", use_container_width=True, key="cta_dashboard"):
+            st.switch_page("pages/5_Dashboard.py")
+    
+    with action_col3:
+        if st.button("🔐 Scan Wallet Risk", use_container_width=True, key="cta_scam"):
+            st.switch_page("pages/4_Scam_Detector.py")
+    
+    st.divider()
+    
+    # Stats and social proof
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("[GitHub](https://github.com/AbdulRehmanRaza03/CryptoGuard-AI)")
+        st.metric("Features", "7+", "Core Tools")
     with col2:
-        st.markdown("[Docs](https://github.com/AbdulRehmanRaza03/CryptoGuard-AI)")
+        st.metric("Data Refresh", "<1s", "Real-time")
     with col3:
-        st.markdown("[Support](https://github.com/AbdulRehmanRaza03/CryptoGuard-AI/issues)")
+        st.metric("Support", "Active", "Community")
+    
+    st.divider()
+    
+    # Footer with additional info
+    st.markdown(
+        """
+        <div style="text-align:center;color:rgba(237,242,255,0.6);padding:2rem 0;font-size:0.9rem;">
+            <p>🛡️ CryptoGuard AI | Premium Portfolio Intelligence Platform</p>
+            <p>Built with ❤️ for the crypto community | <a href="https://github.com/AbdulRehmanRaza03/CryptoGuard-AI" style="color:#5eead4;">Open Source on GitHub</a></p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-# Main content area - directed by page selection
-def main():
-    """Main application flow"""
-    st.write("")  # Add spacing
-    
-    # Page routing handled automatically by Streamlit
-    # Pages in the 'pages/' directory are automatically available
-    
+
 if __name__ == "__main__":
     main()
